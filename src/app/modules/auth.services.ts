@@ -39,7 +39,7 @@ const createUser = async (payload: IUser) => {
       subject: "verify your email",
       html: `
     <P>Hello ${payload.name}, please verify your email</p>
-    <a href="http://localhost:3000/verify/${createSecret}/" target="_blank">Click here to verify your email</a>`,
+    <a href="https://stupendous-syrniki-758b36.netlify.app/verify/${createSecret}/" target="_blank">Click here to verify your email</a>`,
     };
     const result = await transporter.sendMail(mailOptions);
 

@@ -19,7 +19,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 const LogIn = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await AuthUserServices.LogIn(req.body);
-    sendResponse<string>(res, {
+    sendResponse(res, {
       statusCode: 200,
       success: true,
       message: "successfully logged in a user",
