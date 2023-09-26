@@ -12,10 +12,8 @@ const CreateUser = z.object({
     email: z.string({
       required_error: "email is required",
     }),
-    role: z.enum([...UserRoleConstant] as [string, ...string[]], {
-      required_error: "role is required",
-    }),
-    phoneNO: z.number({
+    role: z.enum([...UserRoleConstant] as [string, ...string[]]).optional(),
+    phoneNo: z.string({
       required_error: "phone number is required",
     }),
     image: z.string({ required_error: "image is required" }),

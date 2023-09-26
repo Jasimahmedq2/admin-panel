@@ -3,12 +3,21 @@ export type IUser = {
   email: string;
   password: string;
   role: string;
-  phoneNo: number;
+  isVerified: boolean;
+  phoneNo: string;
   image: string;
-  birthday: Date;
+  birthday: string;
 };
 
 export type ILogin = {
   email: string;
   password: string;
+};
+
+export type ILoginResponse = {
+  isVerified: boolean;
+  userId: string;
+  email: string;
+  role: string;
+  token: string;
 };

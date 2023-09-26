@@ -19,10 +19,14 @@ const UserModel = new Schema<IUser>({
   role: {
     enum: UserRoleConstant,
     type: String,
-    required: true,
+    default: "user",
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
   },
   phoneNo: {
-    type: Number,
+    type: String,
     required: true,
   },
   image: {
@@ -31,7 +35,7 @@ const UserModel = new Schema<IUser>({
     default: "",
   },
   birthday: {
-    type: Date,
+    type: String,
     required: true,
   },
 });

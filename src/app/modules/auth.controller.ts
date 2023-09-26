@@ -6,7 +6,7 @@ import { IUser } from "./auth.interfaces";
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await AuthUserServices.createUser(req.body);
-    sendResponse<IUser>(res, {
+    sendResponse(res, {
       statusCode: 200,
       success: true,
       message: "successfully created a user",
@@ -29,8 +29,29 @@ const LogIn = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+const verifyEmailAndUpdateStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { token } = req.params;
+    // const token = (req as any).headers.authorization.split(" ")[1];
+    console.log({ token });
+    const result = await AuthUserServices.verifyEmailAndUpdateStatus(token);
+    sendResponse<IUser | null>(res, {
+      statusCode: 200,
+      success: true,
+      message: "now the user is verified!",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const AuthUserControllers = {
   createUser,
   LogIn,
+  verifyEmailAndUpdateStatus,
 };
