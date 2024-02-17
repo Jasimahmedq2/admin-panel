@@ -1,12 +1,12 @@
 import express from "express";
 import { AuthUserControllers } from "./auth.controller";
-import ValidateRequest from "../middleware/validateRequest";
 import { AuthValidationSchema } from "./auth.validation";
-import auth from "../middleware/auth";
+import auth from "../../middleware/auth";
+import ValidateRequest from "../../middleware/validateRequest";
 const router = express.Router();
 
 router.post(
-  "/registration",
+  "/create-request",
   ValidateRequest(AuthValidationSchema.CreateUser),
   AuthUserControllers.createUser
 );
@@ -17,6 +17,10 @@ router.post(
   AuthUserControllers.LogIn
 );
 
-router.post("/verify/:token", AuthUserControllers.verifyEmailAndUpdateStatus);
+router.post(
+  "/approve/:id",
+  auth("admin"),
+  AuthUserControllers.verifyEmailAndUpdateStatus
+);
 
 export const AuthRoutes = router;

@@ -4,9 +4,7 @@ export type IUser = {
   password: string;
   role: string;
   isVerified: boolean;
-  phoneNo: string;
-  image: string;
-  birthday: string;
+  lastVisited: Date;
 };
 
 export type ILogin = {
