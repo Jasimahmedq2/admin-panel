@@ -14,6 +14,21 @@ export default {
     verify_secret: process.env.VERIFY_SECRET,
     verify_email_expire: process.env.VERIFY_EMAIL_EXPIRE,
   },
+  google: {
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+  },
+  facebook: {
+    client_id: process.env.FACEBOOK_CLIENT_ID,
+    client_secret: process.env.FACEBOOK_CLIENT_SECRET,
+  },
+  aws: {
+    bucket_name: process.env.BUCKET_NAME,
+    bucket_origin: process.env.BUCKET_ORIGIN,
+    access_key: process.env.AWS_USER_ACCESS_KEY,
+    secret_key: process.env.AWS_USER_SECRET_KEY,
+  },
   my_email: process.env.MY_EMAIL,
   my_password: process.env.MY_PASSWORD,
+  session_secret: process.env.SESSION_SECRET,
 };
