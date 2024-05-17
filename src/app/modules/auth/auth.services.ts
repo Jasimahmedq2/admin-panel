@@ -64,6 +64,10 @@ const createUser = async (payload: IUser) => {
 
 const LogIn = async (payload: ILogin): Promise<ILoginResponse> => {
   const isUserExist = await User.findOne({ email: payload.email });
+  console.log({
+    access_token: config.jwt.access_secret,
+    expire: config.jwt.access_expire,
+  });
   if (!isUserExist) {
     throw new ApiError(404, "user doesn't exist");
   }

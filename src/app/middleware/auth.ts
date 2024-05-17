@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 import { NextFunction, Request, Response } from "express";
 import { JwtHelpers } from "../../shared/jwtHelpers";
-import config from "../../config";
 import { Secret } from "jsonwebtoken";
 import ApiError from "../../errors/apiError";
+import config from "../../config";
 
 const auth =
   (...Roles: string[]) =>

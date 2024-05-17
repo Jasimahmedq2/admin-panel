@@ -2,6 +2,7 @@ import express from "express";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { FollowRoutes } from "../modules/follow/follow.routes";
 import { postRoutes } from "../modules/post/post.routes";
+import { profileRouter } from "../modules/profile/profile.router";
 
 const router = express.Router();
 
@@ -11,12 +12,16 @@ const CoreRoutes = [
     element: AuthRoutes,
   },
   {
-    path: "/follow",
+    path: "/post",
+    element: postRoutes,
+  },
+  {
+    path: "/following",
     element: FollowRoutes,
   },
   {
-    path: "/post",
-    element: postRoutes,
+    path: "/profile",
+    element: profileRouter,
   },
 ];
 

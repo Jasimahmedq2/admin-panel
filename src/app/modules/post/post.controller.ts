@@ -8,10 +8,9 @@ const createPost = catchAsync(async (req: Request, res: Response) => {
   const location = (req as any).file.location;
   const result = await PostServices.createPost(userId, location, req.body);
   sendResponse(res, {
-    statusCode: 200,
+    statusCode: 201,
     success: true,
     message: "the post created",
-    data: result,
   });
 });
 
