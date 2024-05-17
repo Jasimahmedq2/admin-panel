@@ -1,8 +1,8 @@
 import express from "express";
-import { AuthRoutes } from "../modules/auth/auth.route";
 import { FollowRoutes } from "../modules/follow/follow.routes";
 import { postRoutes } from "../modules/post/post.routes";
 import { profileRouter } from "../modules/profile/profile.router";
+import { AuthRoutes } from "../modules/auth/auth.route";
 
 const router = express.Router();
 

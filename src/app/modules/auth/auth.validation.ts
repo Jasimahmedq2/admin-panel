@@ -6,9 +6,6 @@ const CreateUser = z.object({
     name: z.string({
       required_error: "name is required",
     }),
-    password: z.string({
-      required_error: "password is required",
-    }),
     email: z.string({
       required_error: "email is required",
     }),
