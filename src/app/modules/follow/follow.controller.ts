@@ -62,10 +62,24 @@ const getAllFollowing = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+// is followed
+const isFollowed = catchAsync(async (req: Request, res: Response) => {
+  const { id: followed } = (req as any).params;
+  const { userId } = (req as any).user;
+
+  const result = await FollowServices.isFollowed(userId, followed);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "is followed user",
+    data: result,
+  });
+});
 
 export const FollowControllers = {
   followUser,
   unFollowUser,
   getAllFollowers,
   getAllFollowing,
+  isFollowed,
 };

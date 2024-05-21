@@ -15,4 +15,8 @@ router
   .route("/followings")
   .get(auth("user"), FollowControllers.getAllFollowing);
 
+router
+  .route("/isFollow/:id")
+  .get(auth(UserRoles.USER), FollowControllers.isFollowed);
+
 export const FollowRoutes = router;

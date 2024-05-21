@@ -12,9 +12,7 @@ const CreateUser = z.object({
     role: z.enum([...UserRoleConstant] as [string, ...string[]]).optional(),
     phone_no: z.string({
       required_error: "phone number is required",
-    }),
-    image: z.string({ required_error: "image is required" }),
-    birthday: z.string({ required_error: "your birthday is required" }),
+    })
   }),
 });
 

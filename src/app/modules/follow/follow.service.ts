@@ -45,9 +45,35 @@ const getAllFollowing = async (userId: Types.ObjectId) => {
   return follows;
 };
 
+// isFollowed
+const isFollowed = async (userId: Types.ObjectId, followed: Types.ObjectId) => {
+  const following: any = await Follow.findOne({
+    follower: userId,
+    followed: followed,
+  });
+
+  const followedData: any = await Follow.findOne({
+    follower: followed,
+    followed: userId,
+  });
+
+  console.log({ following, followedData, userId, followed });
+
+  let followStatus;
+  if (following) {
+    followStatus = "following";
+  } else if (followedData) {
+    followStatus = "followed";
+  } else {
+    followStatus = "follow";
+  }
+  return followStatus;
+};
+
 export const FollowServices = {
   followUser,
   unFollowUser,
   getAllFollowers,
   getAllFollowing,
+  isFollowed,
 };

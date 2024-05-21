@@ -21,29 +21,41 @@ const createUser = async (payload: IUser) => {
     Number(config.bcrypt_salt_rounds)
   );
 
+  const isExistUser = await User.findOne({
+    email: payload.email,
+    phone_no: payload.phone_no,
+  });
+
+  console.log({ isExistUser });
+
+  // if (isExistUser) {
+  //   throw new ApiError(401, "user already exist");
+  // }
+
   const createSecret = await JwtHelpers.createToken(
     { email: payload.email },
     config.jwt.verify_secret as Secret,
     config.jwt.verify_email_expire as string
   );
 
-  const isExistUser = await User.findOne({
-    email: payload.email,
-    phoneNo: payload.phone_no,
-  });
+  console.log({ createSecret });
 
   if (isExistUser) {
-    const mailOptions = {
-      from: config.my_email,
-      to: payload.email,
-      subject: "verify your email",
-      html: `
-    <P>Hello ${payload.name}, please verify your email</p>
-    <a href="http://localhost:3000/verify/${createSecret}/" target="_blank">Click here to verify your email</a>`,
-    };
-    const result = await transporter.sendMail(mailOptions);
+    if (!isExistUser.is_verified) {
+      const mailOptions = {
+        from: config.my_email,
+        to: payload.email,
+        subject: "verify your email",
+        html: `
+      <P>Hello ${payload.name}, please verify your email</p>
+      <a href="http://localhost:3000/verify/${createSecret}/" target="_blank">Click here to verify your email</a>`,
+      };
+      const result = await transporter.sendMail(mailOptions);
 
-    return result;
+      return result;
+    } else {
+      throw new ApiError(200, "already you have a account, please login.");
+    }
   } else {
     await User.create(payload);
 
@@ -56,7 +68,6 @@ const createUser = async (payload: IUser) => {
     <a href="http://localhost:3000/verify/${createSecret}/" target="_blank">Click here to verify your email</a>`,
     };
     const result = await transporter.sendMail(mailOptions);
-    console.log({ createSecret });
 
     return result;
   }
@@ -109,6 +120,7 @@ const LogIn = async (payload: ILogin): Promise<ILoginResponse> => {
 const verifyEmailAndUpdateStatus = async (
   token: string
 ): Promise<IUser | null> => {
+  console.log({ token });
   const verifyToken = await JwtHelpers.verifyToken(
     token,
     config.jwt.verify_secret as Secret
@@ -125,7 +137,7 @@ const verifyEmailAndUpdateStatus = async (
 
   const result = await User.findOneAndUpdate(
     { email },
-    { $set: { isVerified: true } }
+    { $set: { is_verified: true } }
   );
 
   return result;

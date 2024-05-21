@@ -7,7 +7,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await AuthUserServices.createUser(req.body);
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: 201,
       success: true,
       message: "successfully created a user",
       data: result,
@@ -37,8 +37,8 @@ const verifyEmailAndUpdateStatus = async (
   next: NextFunction
 ) => {
   try {
-    const { id } = req.params;
-    const result = await AuthUserServices.verifyEmailAndUpdateStatus(id);
+    const { token } = req.params;
+    const result = await AuthUserServices.verifyEmailAndUpdateStatus(token);
     sendResponse(res, {
       statusCode: 200,
       success: true,

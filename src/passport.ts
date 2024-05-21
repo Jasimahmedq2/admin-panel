@@ -4,7 +4,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import config from "./config";
 
 passport.serializeUser<any, any>((user, done) => {
-  done(null, user);
+  // done(null, user);
 });
 
 passport.deserializeUser<any, any>((user, done) => {
